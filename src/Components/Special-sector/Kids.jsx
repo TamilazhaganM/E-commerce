@@ -60,9 +60,9 @@ function Kids() {
      { id: 6, visibleImage: prince6,rate:1200},
    ];
    return (
-     <div className="p-10">
-       <div className="text-xs my-20 bg-white shadow-sm">
-         <h2>MENS | CLOTHING-PRINCE</h2>
+     <div className="p-5">
+  <div className="lg:text-xs font-semibold lg:my-20 bg-white shadow-sm">
+           <h2>KIDS| CLOTHING-PRINCE</h2>
          <p className="text-center py-5">Showing: 6 Results</p>
        </div>
  

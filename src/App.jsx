@@ -14,7 +14,7 @@ import Tshirt from "./Components/Special-sector/Tshirt.jsx";
 import Modern from "./Components/Special-sector/Modern.jsx";
 import Princess from "./Components/Special-sector/Princess.jsx";
 import Partywear from "./Components/Special-sector/Partywear.jsx";
-import Payment from "./Components/payment.jsx";
+import Payment from "./Components/Payment.jsx";
 
 
 const App = () => {

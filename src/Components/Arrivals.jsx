@@ -15,19 +15,30 @@ import men3 from "../assets/image/CarouselModels/modelmen3.jpg";
 import men4 from "../assets/image/CarouselModels/modelmen4.jpg";
 import kid1 from "../assets/image/CarouselModels/modelkids1.jpg";
 import kid2 from "../assets/image/CarouselModels/modelkids2.jpg";
+import mode1blur from "../assets/image/CarouselModels/modelmen1-blur.jpg"
+import Girl1blur from "../assets/image/CarouselModels/modelgirl1-blur.jpg";
+import Girl2blur from "../assets/image/CarouselModels/modelgirl2-blur.jpg";
+import Girl3blur from "../assets/image/CarouselModels/modelgirl3-blur.jpg";
+import Girl4blur from "../assets/image/CarouselModels/modelgirl4-blur.jpg";
+import men1blur from "../assets/image/CarouselModels/modelmen1-blur.jpg";
+import men2blur from "../assets/image/CarouselModels/modelmen2-blur.jpg";
+import men3blur from "../assets/image/CarouselModels/modelmen3-blur.jpg";
+import men4blur from "../assets/image/CarouselModels/modelmen4-blur.jpg";
+import kid1blur from "../assets/image/CarouselModels/modelkids1-blur.jpg";
+import kid2blur from "../assets/image/CarouselModels/modelkids2-blur.jpg";
 
 function Arrivals() {
   const images = [
-    { src: Girl1, alt: "Girl-1", dressModel: "Striped", price: 1500 },
-    { src: men1, alt: "Mens-1", dressModel: "Jacket", price: 2000 },
-    { src: Girl2, alt: "Girl-2", dressModel: "T-shirt", price: 1200 },
-    { src: men2, alt: "Mens-2", dressModel: "Sweat-shirt", price: 1000 },
-    { src: kid1, alt: "Kid-1", dressModel: "Denim", price: 500 },
-    { src: Girl3, alt: "Girl-3", dressModel: "Tops", price: 1500 },
-    { src: men3, alt: "Mens-3", dressModel: "Shirts", price: 1200 },
-    { src: kid2, alt: "Kid-2", dressModel: "Angels", price: 1500 },
-    { src: Girl4, alt: "Girl-4", dressModel: "Pants", price: 2500 },
-    { src: men4, alt: "Mens-4", dressModel: "Denim", price: 3000 },
+    { src: Girl1, alt: "Girl-1", dressModel: "Striped", price: 1500,placeholderSrc:Girl1blur },
+    { src: men1, alt: "Mens-1", dressModel: "Jacket", price: 2000,placeholderSrc:men1blur },
+    { src: Girl2, alt: "Girl-2", dressModel: "T-shirt", price: 1200,placeholderSrc:Girl2blur},
+    { src: men2, alt: "Mens-2", dressModel: "Sweat-shirt", price: 1000,placeholderSrc:men2blur },
+    { src: kid1, alt: "Kid-1", dressModel: "Denim", price: 500,placeholderSrc:kid1blur },
+    { src: Girl3, alt: "Girl-3", dressModel: "Tops", price: 1500,placeholderSrc:Girl3blur },
+    { src: men3, alt: "Mens-3", dressModel: "Shirts", price: 1200,placeholderSrc:men3blur },
+    { src: kid2, alt: "Kid-2", dressModel: "Angels", price: 1500,placeholderSrc:kid2blur },
+    { src: Girl4, alt: "Girl-4", dressModel: "Pants", price: 2500,placeholderSrc:Girl4blur },
+    { src: men4, alt: "Mens-4", dressModel: "Denim", price: 3000,placeholderSrc:men4blur },
   ];
 
   const settings = {
@@ -77,6 +88,7 @@ function Arrivals() {
                 src={image.src}
                 alt={image.alt}
                 effect="blur"
+                placeholderSrc={image.placeholderSrc}
               />
               <div className="p-2">
                 <p className="italic text-sm text-center">{image.dressModel}</p>

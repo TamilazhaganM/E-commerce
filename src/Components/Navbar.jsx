@@ -113,7 +113,7 @@ const Navbar = () => {
               </Link>
               <div className="absolute left-0 z-10 hidden group-hover:block bg-white shadow-lg w-[100px] p-2 ">
                 <ul className="w-full">
-                  <li className="hover:text-amber-400 cursor-pointer p-2 w-full">
+                  <li className="hover:text-amber-400 cursor-pointer p-2 w-full" onClick={() => setMenuOpen(!menuOpen)}>
                     <Link to={"/home/mens"} className=" hover:text-amber-400 ">
                       SHIRTS
                     </Link>
@@ -123,6 +123,7 @@ const Navbar = () => {
                     <Link
                       to={"/home/mens-T-shirts"}
                       className=" hover:text-amber-400 "
+                      onClick={() => setMenuOpen(!menuOpen)}
                     >
                       {" "}
                       T-SHIRTS

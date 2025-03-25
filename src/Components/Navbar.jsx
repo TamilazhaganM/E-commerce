@@ -33,7 +33,7 @@ const Navbar = () => {
         </button>
         <div className="text-center">
           <h1 className=" text-4xl text-center font-Bigshoulder tracking-widest text-black">
-            ZYRA
+          <Link to="/">ZYRA</Link>
           </h1>
         </div>
         <div className="flex ">
@@ -107,10 +107,8 @@ const Navbar = () => {
             <li onClick={() => setMenuOpen(!menuOpen)}>
               <Link to="/">HOME</Link>
             </li>
-            <li className="relative group text-amber-950 font-italic text-xs">
-              <Link to={"/home/mens"} className=" hover:text-amber-400 ">
-                MEN'S
-              </Link>
+            <li className="relative group text-amber-950 font-italic text-xs">                MEN'S
+              
               <div className="absolute left-0 z-10 hidden group-hover:block bg-white shadow-lg w-[100px] p-2 ">
                 <ul className="w-full">
                   <li className="hover:text-amber-400 cursor-pointer p-2 w-full" onClick={() => setMenuOpen(!menuOpen)}>
@@ -134,9 +132,8 @@ const Navbar = () => {
               </div>
             </li>
             <li className=" text-amber-950 font-italic group relative text-xs">
-              <Link to={"/home/womens"} className=" hover:text-amber-400 ">
                 WOMEN'S
-              </Link>
+              
               <div className="z-10 hidden group-hover:block absolute left-0 bg-white shadow-lg p-2">
                 <ul className="">
                   <li className="hover:text-amber-400 cursor-pointer p-2 w-full">
@@ -164,9 +161,8 @@ const Navbar = () => {
               </div>
             </li>
             <li className=" text-amber-950 font-italic group relative text-xs">
-              <Link to={"/home/kids"} className=" hover:text-amber-400 ">
                 KIDS
-              </Link>
+             
               <div className="hidden group-hover:block absolute left-0 bg-white shadow-lg p-2">
                 <ul className="">
                   <li className="hover:text-amber-400 cursor-pointer p-2 w-full">
@@ -209,7 +205,7 @@ const Navbar = () => {
         <div className=" container flex mx-auto items-center justify-between p-2 ">
           <div className=" absolute top-0 left-1/2 py-1 mx-6  z-51 transform -translate-x-1/2">
             <h1 className=" text-4xl text-center font-Bigshoulder tracking-widest text-black">
-              ZYRA
+            <Link to="/">ZYRA</Link>
             </h1>
           </div>
           <ul className="flex ml-20 gap-9 text-base my-auto px-10">

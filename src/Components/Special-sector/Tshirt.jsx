@@ -62,7 +62,7 @@ function Tshirt() {
    return (
      <div className="p-5">
   <div className="lg:text-xs font-semibold lg:my-20 bg-white shadow-sm">
-           <h2>MENS | CLOTHING-T-SHIRTS</h2>
+           <h2>MEN'S | CLOTHING-T-SHIRTS</h2>
          <p className="text-center py-5">Showing: 6 Results</p>
        </div>
  

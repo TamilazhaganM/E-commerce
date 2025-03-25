@@ -2,10 +2,10 @@ import React from "react";
 
 function Payment() {
   return (
-    <div className="flex flex-col items-center my-32 px-4">
-      <div className="flex w-full max-w-5xl gap-8">
+    <div className=" flex flex-col md:flex-row  items-center justify-center gap-8 my-12 md:my-32 px-4">
+      <div className="flex flex-col md:flex-row w-full max-w-5xl gap-8">
         {/* Left Side - Delivery Form */}
-        <div className="w-2/3 flex flex-col gap-4">
+        <div className="md:w-2/3 w-full flex flex-col gap-4">
           <h2 className="text-2xl font-bold mb-4">Delivery Details</h2>
 
           <div className="flex flex-col gap-2">
@@ -102,11 +102,11 @@ function Payment() {
         </div>
 
         {/* Right Side - Price Summary */}
-        <div className="w-1/3 bg-gray-100 p-6 rounded shadow-md">
+        <div className="md:w-1/3 w-full bg-gray-100 my-24 p-6 rounded shadow-md">
           <h2 className="text-xl font-bold mb-4">Order Summary</h2>
           <div className="flex justify-between mb-2">
-            <span>Subtotal</span>
-            <input className="border  border-black" type="phone"/>
+            <span>Subtotal :</span>
+            <input className="border p-3 w-[150px]   border-black" type="phone"/>
           </div>
           <div className="flex justify-between mb-2">
             <span>Shipping</span>
@@ -114,7 +114,7 @@ function Payment() {
           </div>
           <div className="flex justify-between mb-4 border-t pt-2 font-semibold">
             <span>Total</span>
-            <input className="border  border-black" type="phone"/>
+            <input className="border p-3 w-[150px]  border-black" type="phone"/>
           </div>
           <button className="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600 transition">
             Place Order

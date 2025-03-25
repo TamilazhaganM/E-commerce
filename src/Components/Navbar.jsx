@@ -109,9 +109,9 @@ const Navbar = () => {
             </li>
             <li className="relative group text-amber-950 font-italic text-xs">
               <Link to={"/home/mens"} className=" hover:text-amber-400 ">
-                MENS
+                MEN'S
               </Link>
-              <div className="absolute left-0 hidden group-hover:block bg-white shadow-lg w-[100px] p-2 ">
+              <div className="absolute left-0 z-10 hidden group-hover:block bg-white shadow-lg w-[100px] p-2 ">
                 <ul className="w-full">
                   <li className="hover:text-amber-400 cursor-pointer p-2 w-full">
                     <Link to={"/home/mens"} className=" hover:text-amber-400 ">
@@ -134,10 +134,10 @@ const Navbar = () => {
             </li>
             <li className=" text-amber-950 font-italic group relative text-xs">
               <Link to={"/home/womens"} className=" hover:text-amber-400 ">
-                WOMENS
+                WOMEN'S
               </Link>
-              <div className="hidden group-hover:block absolute left-0 bg-white shadow-lg p-2">
-                <ul className="w-full">
+              <div className="z-10 hidden group-hover:block absolute left-0 bg-white shadow-lg p-2">
+                <ul className="">
                   <li className="hover:text-amber-400 cursor-pointer p-2 w-full">
                     <Link
                       to={"/home/womens"}

@@ -62,7 +62,7 @@ function Womens() {
     ];
     return (
       <div className="p-5">
-  <div className="lg:text-xs font-semibold lg:my-20 bg-white shadow-sm">          <h2>WOMENS | CLOTHING-SAREES</h2>
+  <div className="lg:text-xs font-semibold lg:my-20 bg-white shadow-sm">          <h2>WOMEN'S | CLOTHING-SAREES</h2>
           <p className="text-center py-5">Showing: 6 Results</p>
         </div>
   

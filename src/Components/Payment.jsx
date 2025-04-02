@@ -1,6 +1,18 @@
 import React from "react";
+import { useSelector,useDispatch } from "react-redux";
+import { removeFromcart } from "../Slices/slice";
 
 function Payment() {
+  const cartItems=useSelector((state)=>state.Liked.cart)
+  const subtotal = cartItems.reduce((acc, item) => acc + item.rate, 0);
+  const shipping = cartItems.length > 0 ? 100 : 0; // ₹100 shipping only if items are in cart
+  const total = subtotal + shipping;
+  const dispatch=useDispatch()
+
+  const handleremove=(itemid)=>{
+    dispatch(removeFromcart(itemid))
+  }
+
   return (
     <div className=" flex flex-col md:flex-row  items-center justify-center gap-8 my-12 md:my-32 px-4">
       <div className="flex flex-col md:flex-row w-full max-w-5xl gap-8">
@@ -103,20 +115,39 @@ function Payment() {
 
         {/* Right Side - Price Summary */}
         <div className="md:w-1/3 w-full bg-gray-100 my-24 p-6 rounded shadow-md">
+          {cartItems.length === 0 ? (
+            <p className="text-center text-gray-500">Your cart is empty.</p>
+          ) : (
+            cartItems.map((item) => (
+              <div key={item.id} onClick={()=>handleremove(item.id)} className="flex justify-around h-24 items-center my-10  border-4 rounded-lg cursor-pointer ">
+                <div className="w-2/5 ">
+                  <img className="rounded-lg h-20" src={item.image} alt="" />
+                </div>
+                <div>
+                  <p className="text-sm">RS.{item.rate}</p>
+                </div>
+              </div>
+            ))
+          )}
+
           <h2 className="text-xl font-bold mb-4">Order Summary</h2>
           <div className="flex justify-between mb-2">
             <span>Subtotal :</span>
-            <input className="border p-3 w-[150px]   border-black" type="phone"/>
+            <span>₹ {subtotal}</span>
           </div>
           <div className="flex justify-between mb-2">
             <span>Shipping</span>
-            <span>₹ 100</span>
+            <span>₹ {shipping}</span>
           </div>
           <div className="flex justify-between mb-4 border-t pt-2 font-semibold">
             <span>Total</span>
-            <input className="border p-3 w-[150px]  border-black" type="phone"/>
+            <span>₹ {total}</span>
           </div>
-          <button className="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600 transition">
+
+          <button
+            className={`w-full py-2 rounded transition ${cartItems.length === 0 ? "bg-gray-300 cursor-not-allowed" : "bg-green-500 text-white hover:bg-green-600"}`}
+            disabled={cartItems.length === 0}
+          >
             Place Order
           </button>
         </div>

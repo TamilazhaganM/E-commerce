@@ -6,12 +6,15 @@ import Mens22 from "../../assets/image/Mens-section/mens22.jpg";
 import Mens3 from "../../assets/image/Mens-section/mens3.jpg";
 import Mens33 from "../../assets/image/Mens-section/mens33.jpg";
 import { useDispatch } from "react-redux";
-import {incrementHeart,decrementHeart, decrementCard, incrementCart } from "../../Slices/slice";
+import {incrementHeart,decrementHeart, decrementCard, incrementCart,addToCart } from "../../Slices/slice";
+
 
 export default function Mens() {
   const [liked, setLiked] = useState({});
   const [cardAdded, setCardAdded] = useState({});
   const [zoomImage,setZoomImage]=useState(null)
+  const [select,setSelect]=useState([])
+
 
   const Dispatch=useDispatch()
 
@@ -30,13 +33,16 @@ export default function Mens() {
       })
 
   }
-  function checkcard(id) {
+  function checkcard(id,visibleImage,rate) {
     setCardAdded((prev) => {
       const isAdded=prev[id]
       if(isAdded){
         Dispatch(decrementCard())
       }else{
         Dispatch(incrementCart())
+        const product={id,image:visibleImage,rate};
+        setSelect((prev)=>[...prev,product])
+        Dispatch(addToCart(product))
       }
       return{
         ...prev,
@@ -44,7 +50,9 @@ export default function Mens() {
       }
       })
 
+      
   }
+  console.log(select)
   function zoomEffect(ImageUrl){
     setZoomImage(ImageUrl)
   }
@@ -103,7 +111,7 @@ export default function Mens() {
                 </button>
 
                 {/* Other buttons */}
-                <button className="group" onClick={()=>checkcard(image.id)}>
+                <button className="group" onClick={()=>checkcard(image.id,image.visibleImage,image.rate)}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill={cardAdded[image.id]?"black":"none"}

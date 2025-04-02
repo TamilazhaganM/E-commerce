@@ -18,7 +18,7 @@ function Home() {
         alt="Home image"
         placeholderSrc={image1blur}
         effect="blur"
-        threshold={0.1}
+        threshold={0.1  }
         className="w-screen h-96 sm:h-auto md:h-auto lg:h-auto relative"
       />
       <div className=" w-[150px] h-[150px] bottom-[100px] relative md:w-[200px] md:h-[200px] md:relative md:bottom-[200px]  flex flex-col justify-center items-center lg:w-[300px] lg:h-[400px] lg:relative bg-gray-800 lg:bottom-[400px] left-2">

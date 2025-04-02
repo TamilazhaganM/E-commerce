@@ -6,13 +6,14 @@ import prince4 from '../../assets/image/kidssection/prince4.jpg'
 import prince5 from '../../assets/image/kidssection/prince5.jpg'
 import prince6 from '../../assets/image/kidssection/prince6.jpg'
 import { useDispatch } from "react-redux";
-import { incrementHeart,decrementHeart, decrementCard, incrementCart } from "../../Slices/slice";
+import { incrementHeart,decrementHeart, decrementCard, incrementCart,addToCart } from "../../Slices/slice";
 
 
 function Kids() {
   const [liked, setLiked] = useState({});
-  const [added,setAdded]=useState({})
+  const [added,setCardAdded]=useState({})
   const [zoomImage,setZoomImage]=useState(null)
+    const [select,setSelect]=useState([])
     const dispatch=useDispatch()
   
     function colorCheck(id) {
@@ -30,21 +31,25 @@ function Kids() {
         })
   
     }
-    function checkcard(id) {
-        setAdded((prev) => {
-          const isAdded=prev[id]
-          if(isAdded){
-            dispatch(decrementCard())
-          }else{
-            dispatch(incrementCart())
-          }
-          return{
-            ...prev,
-            [id]: !prev[id],
-          }
-          })
-    
-      }
+   function checkcard(id,visibleImage,rate) {
+       setCardAdded((prev) => {
+         const isAdded=prev[id]
+         if(isAdded){
+           dispatch(decrementCard())
+         }else{
+           dispatch(incrementCart())
+           const product={id,image:visibleImage,rate};
+           setSelect((prev)=>[...prev,product])
+           dispatch(addToCart(product))
+         }
+         return{
+           ...prev,
+           [id]: !prev[id],
+         }
+         })
+   
+         
+     }
       function zoomEffect(ImageUrl){
         setZoomImage(ImageUrl)
       }
@@ -101,7 +106,7 @@ function Kids() {
                     />
                   </svg>
                 </button>
-                   <button className="group" onClick={()=>checkcard(image.id)}>
+                   <button className="group" onClick={()=>checkcard(image.id,image.visibleImage,image.rate)}>
                      <svg
                        xmlns="http://www.w3.org/2000/svg"
                        fill={added[image.id]?'black':'none'}

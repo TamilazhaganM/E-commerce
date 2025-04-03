@@ -1,40 +1,43 @@
-import express from "express";
-import dotenv from "dotenv";
-import Razorpay from "razorpay";
-import Cors from "cors";
+import express from "express"
+import dotenv from 'dotenv'
+import Razorpay from "razorpay"
+import Cors from "cors"
 
-dotenv.config();
-const PORT = process.env.PORT || 5000;
-const app = express();
-app.use(Cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 
-app.post("/order", (req, res) => {
-  console.log("order received", req.body);
-  res.status(200).json({ message: "Order placed succesfully" });
-});
+dotenv.config()
+const app=express()
+const PORT=5000
+app.use(Cors())
+app.use(express.json())
+app.use(express.urlencoded({extended:false}))
+
+
 app.get("/",(req,res)=>{
-    console.log("request got")
-    res.send("hello world")
+  res.send("Hello world")
+})
+app.post("/order",(req,res)=>{
+  res.send("order placed")
 })
 
-app.post("/payment-order", async (req, res) => {
-  try {
+app.post('/place-order',async(req,res)=>{
+  try{
     const razorpay = new Razorpay({
-      key_id: process.env.RAZORPAY_KEY_ID,
-      key_secret: process.env.RAZORPAY_KEY_SECRET,
-    });
-
-    const options = req.body;
-    const order = await razorpay.orders.create(options);
-    res.status(200).json({ message: "order placed" });
-  } catch (error) {
-    console.log(error);
-    res.status(500).send("Error in order");
+      key_id:process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET 
+    })
+  
+    const options=req.body;
+    const order =await razorpay.orders.create(options)
+    res.status(200).json({success:true,order})
   }
-});
+  catch (error) {
+    console.error("Error creating order:", error); // Log the error
+    res.status(500).json({ success: false, error: error.message });
+  }
+  
+})
 
-app.listen(PORT, () => {
-  console.log("Server is running on port :", PORT);
-});
+app.listen(PORT,()=>{
+console.log('server is running on port '+ PORT);
+
+})

@@ -1,17 +1,69 @@
 import React from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { removeFromcart } from "../Slices/slice";
-
+import axios from 'axios'
 function Payment() {
   const cartItems=useSelector((state)=>state.Liked.cart)
   const subtotal = cartItems.reduce((acc, item) => acc + item.rate, 0);
-  const shipping = cartItems.length > 0 ? 100 : 0; // ₹100 shipping only if items are in cart
+  const shipping = subtotal > 0 ? 100 : 0;
   const total = subtotal + shipping;
   const dispatch=useDispatch()
 
   const handleremove=(itemid)=>{
     dispatch(removeFromcart(itemid))
   }
+  const amount =total*100;
+  const currency ="INR";
+  const receipt = "order_receipt_" + new Date().getTime()
+const paymenthandle= async(e)=>{
+  e.preventDefault();
+  try {
+    const response = await axios.post("http://localhost:5000/place-order",{
+      amount,
+      currency,
+      receipt
+    })
+    const order =response.data;
+    console.log(order)
+    var options = {
+      "key": "rzp_test_Gvdiu2pkjvoH7o", // Enter the Key ID generated from the Dashboard
+      amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      currency,
+      "name": "Zyra Dress ", //your business name
+      "description": "Test Transaction",
+      "image": "https://example.com/your_logo",
+      "order_id":order.id , //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      "handler": function (response){
+      },
+      "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
+          "name": "Gaurav Kumar", //your customer's name
+          "email": "gaurav.kumar@example.com", 
+          "contact": "9000090000"  //Provide the customer's phone number for better conversion rates 
+      },
+      "notes": {
+          "address": "Razorpay Corporate Office"
+      },
+      "theme": {
+          "color": "#3399cc"
+      }
+  };
+  var rzp1 = new window.Razorpay(options);
+  rzp1.on('payment.failed', function (response){
+          alert(response.error.code);
+          alert(response.error.description);
+          alert(response.error.source);
+          alert(response.error.step);
+          alert(response.error.reason);
+          alert(response.error.metadata.order_id);
+          alert(response.error.metadata.payment_id);
+  });
+  rzp1.open();
+
+  } catch (error) {
+    console.error("Error creating payment order:", error.response?.data || error.message);
+  }
+
+}
 
   return (
     <div className=" flex flex-col md:flex-row  items-center justify-center gap-8 my-12 md:my-32 px-4">
@@ -145,6 +197,7 @@ function Payment() {
           </div>
 
           <button
+          onClick={paymenthandle}
             className={`w-full py-2 rounded transition ${cartItems.length === 0 ? "bg-gray-300 cursor-not-allowed" : "bg-green-500 text-white hover:bg-green-600"}`}
             disabled={cartItems.length === 0}
           >

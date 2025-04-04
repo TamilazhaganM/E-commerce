@@ -1,11 +1,11 @@
 import React, { lazy, Suspense } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import Navbar from "./Components/Navbar.jsx";
 import Footer from "./Components/Footer.jsx";
-import Home from "./Components/Home.jsx"; // Home is NOT lazy-loaded
+import Home from "./Components/Home.jsx";
+import Login from "./Components/Login.jsx";
 
-// Lazy-loaded components
 const Payment = lazy(() => import("./Components/Payment.jsx"));
 const Sector = lazy(() => import("./Components/Sector.jsx"));
 const Arrivals = lazy(() => import("./Components/Arrivals.jsx"));
@@ -19,21 +19,25 @@ const Modern = lazy(() => import("./Components/Special-sector/Modern.jsx"));
 const Princess = lazy(() => import("./Components/Special-sector/Princess.jsx"));
 const Partywear = lazy(() => import("./Components/Special-sector/Partywear.jsx"));
 
-// Loader component
 const Loader = () => (
   <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
     <BeatLoader color="#5b0a24" size={15} />
   </div>
 );
 
-const App = () => {
+const AppContent = () => {
+  const location = useLocation();
+
+  const showNavAndFooter = location.pathname !== "/login";
+
   return (
-    <Router>
-      <Navbar />
+    <>
+      {showNavAndFooter && <Navbar />}
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<><Home /><Sector /><Arrivals /><Common /></>} />
           <Route path="/payment" element={<Payment />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/home/womens" element={<Womens />} />
           <Route path="/home/womens-modern" element={<Modern />} />
           <Route path="/home/mens" element={<Mens />} />
@@ -44,7 +48,15 @@ const App = () => {
           <Route path="/home/partywears" element={<Partywear />} />
         </Routes>
       </Suspense>
-      <Footer />
+      {showNavAndFooter && <Footer />}
+    </>
+  );
+};
+
+const App = () => {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 };

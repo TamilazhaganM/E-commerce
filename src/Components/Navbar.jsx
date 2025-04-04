@@ -37,7 +37,10 @@ const Navbar = () => {
           </h1>
         </div>
         <div className="flex ">
-          <button className="flex items-center justify-center bg-white-500 text-white px-4 py-2 rounded hover:bg-gray-200 w-30  ">
+          <button
+           onClick={()=>{
+              navigate("/login")
+            }} className="flex items-center justify-center bg-white-500 text-white px-4 py-2 rounded hover:bg-gray-200 w-30  ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -325,7 +328,11 @@ const Navbar = () => {
             />
           </div>
           <div className="flex">
-            <button className="flex items-center justify-center bg-white-500 text-white px-4 py-2 rounded hover:bg-gray-200 w-30  ">
+            <button 
+            onClick={()=>{
+              navigate("/login")
+            }}
+             className="flex items-center justify-center bg-white-500 text-white px-4 py-2 rounded hover:bg-gray-200 w-30  ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

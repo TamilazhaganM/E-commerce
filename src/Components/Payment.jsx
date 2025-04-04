@@ -18,7 +18,7 @@ function Payment() {
 const paymenthandle= async(e)=>{
   e.preventDefault();
   try {
-    const response = await axios.post("http://localhost:5000/place-order",{
+    const response = await axios.post("https://e-commerce-qbwd.onrender.com/place-order",{
       amount,
       currency,
       receipt

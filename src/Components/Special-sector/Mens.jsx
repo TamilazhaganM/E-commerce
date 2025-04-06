@@ -6,7 +6,7 @@ import Mens22 from "../../assets/image/Mens-section/mens22.jpg";
 import Mens3 from "../../assets/image/Mens-section/mens3.jpg";
 import Mens33 from "../../assets/image/Mens-section/mens33.jpg";
 import { useDispatch } from "react-redux";
-import {incrementHeart,decrementHeart, decrementCard, incrementCart,addToCart } from "../../Slices/slice";
+import {incrementHeart,decrementHeart, decrementCard, incrementCart,addToCart,addToWish } from "../../Slices/slice";
 
 
 export default function Mens() {
@@ -14,44 +14,45 @@ export default function Mens() {
   const [cardAdded, setCardAdded] = useState({});
   const [zoomImage,setZoomImage]=useState(null)
   const [select,setSelect]=useState([])
-
-
+  const [wishlist,setWishlist]=useState([])
   const Dispatch=useDispatch()
 
-  function colorCheck(id) {
-    setLiked((prev) => {
-      const isLiked=prev[id]
-      if(isLiked){
-        Dispatch(decrementHeart())
-      }else{
-        Dispatch(incrementHeart())
-      }
-      return{
-        ...prev,
-        [id]: !prev[id],
-      }
-      })
 
-  }
-  function checkcard(id,visibleImage,rate) {
-    setCardAdded((prev) => {
-      const isAdded=prev[id]
-      if(isAdded){
-        Dispatch(decrementCard())
-      }else{
-        Dispatch(incrementCart())
-        const product={id,image:visibleImage,rate};
-        setSelect((prev)=>[...prev,product])
-        Dispatch(addToCart(product))
+ function colorCheck(id,visibelImage,rate) {
+       setLiked((prev) => {
+         const isLiked=prev[id]
+         if(isLiked){
+           Dispatch(decrementHeart())
+         }else{
+           Dispatch(incrementHeart())
+           const wishProduct ={id,image:visibelImage,rate}
+           setWishlist((prev)=>[...prev,wishProduct])
+           Dispatch(addToWish(wishProduct))
+         }
+         return{
+           ...prev,
+           [id]: !prev[id],
+         }
+         })
+   
+     }
+    function checkcard(id,visibleImage,rate) {
+        setCardAdded((prev) => {
+          const isAdded=prev[id]
+          if(isAdded){
+            Dispatch(decrementCard())
+          }else{
+            Dispatch(incrementCart())
+            const product={id,image:visibleImage,rate};
+            setSelect((prev)=>[...prev,product])
+            Dispatch(addToCart(product))
+          }
+          return{
+            ...prev,
+            [id]: !prev[id],
+          }
+          })      
       }
-      return{
-        ...prev,
-        [id]: !prev[id],
-      }
-      })
-
-      
-  }
   console.log(select)
   function zoomEffect(ImageUrl){
     setZoomImage(ImageUrl)
@@ -92,7 +93,7 @@ export default function Mens() {
                 <button
                   className="group  rounded-full transition-colors 
                   "
-                  onClick={() => colorCheck(image.id)}
+                  onClick={() => colorCheck(image.id,image.visibleImage,image.rate)}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

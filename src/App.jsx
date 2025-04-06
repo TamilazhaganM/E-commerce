@@ -5,6 +5,7 @@ import Navbar from "./Components/Navbar.jsx";
 import Footer from "./Components/Footer.jsx";
 import Home from "./Components/Home.jsx";
 import Login from "./Components/Login.jsx";
+import Wishlist from "./Components/Wishlist.jsx";
 
 const Payment = lazy(() => import("./Components/Payment.jsx"));
 const Sector = lazy(() => import("./Components/Sector.jsx"));
@@ -38,6 +39,7 @@ const AppContent = () => {
           <Route path="/" element={<><Home /><Sector /><Arrivals /><Common /></>} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/wishlist" element={<Wishlist/>}/>
           <Route path="/home/womens" element={<Womens />} />
           <Route path="/home/womens-modern" element={<Modern />} />
           <Route path="/home/mens" element={<Mens />} />

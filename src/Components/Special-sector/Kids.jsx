@@ -6,7 +6,7 @@ import prince4 from '../../assets/image/kidssection/prince4.jpg'
 import prince5 from '../../assets/image/kidssection/prince5.jpg'
 import prince6 from '../../assets/image/kidssection/prince6.jpg'
 import { useDispatch } from "react-redux";
-import { incrementHeart,decrementHeart, decrementCard, incrementCart,addToCart } from "../../Slices/slice";
+import { incrementHeart,decrementHeart, decrementCard, incrementCart,addToCart,addToWish } from "../../Slices/slice";
 
 
 function Kids() {
@@ -14,23 +14,26 @@ function Kids() {
   const [added,setCardAdded]=useState({})
   const [zoomImage,setZoomImage]=useState(null)
     const [select,setSelect]=useState([])
+      const [wishlist,setWishlist]=useState([])
     const dispatch=useDispatch()
-  
-    function colorCheck(id) {
-      setLiked((prev) => {
-        const isLiked=prev[id]
-        if(isLiked){
-          dispatch(decrementHeart())
-        }else{
-          dispatch(incrementHeart())
-        }
-        return{
-          ...prev,
-          [id]: !prev[id],
-        }
-        })
-  
-    }
+   function colorCheck(id,visibelImage,rate) {
+        setLiked((prev) => {
+          const isLiked=prev[id]
+          if(isLiked){
+            dispatch(decrementHeart())
+          }else{
+            dispatch(incrementHeart())
+            const wishProduct ={id,image:visibelImage,rate}
+            setWishlist((prev)=>[...prev,wishProduct])
+            dispatch(addToWish(wishProduct))
+          }
+          return{
+            ...prev,
+            [id]: !prev[id],
+          }
+          })
+    
+      }
    function checkcard(id,visibleImage,rate) {
        setCardAdded((prev) => {
          const isAdded=prev[id]
@@ -89,7 +92,7 @@ function Kids() {
                <button
                   className="group  rounded-full transition-colors 
                   "
-                  onClick={() => colorCheck(image.id)}
+                  onClick={() => colorCheck(image.id,image.visibleImage,image.rate)}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

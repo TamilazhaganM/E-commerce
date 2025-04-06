@@ -6,7 +6,7 @@ import modern4 from '../../assets/image/Modern/modern4.jpg'
 import modern5 from '../../assets/image/Modern/modern5.jpg'
 import modern6 from '../../assets/image/Modern/modern6.jpg'
 import { useDispatch } from "react-redux";
-import {incrementHeart,decrementHeart, decrementCard, incrementCart,addToCart } from "../../Slices/slice";
+import {incrementHeart,decrementHeart, decrementCard, incrementCart,addToCart,addToWish } from "../../Slices/slice";
 
 
 function Modern() {
@@ -14,43 +14,45 @@ function Modern() {
     const [cardAdded, setCardAdded] = useState({});
     const [zoomImage,setZoomImage]=useState(null)
      const [select,setSelect]=useState([])
+          const [wishlist,setWishlist]=useState([])
   
     const Dispatch=useDispatch()
   
-    function colorCheck(id) {
-      setLiked((prev) => {
-        const isLiked=prev[id]
-        if(isLiked){
-          Dispatch(decrementHeart())
-        }else{
-          Dispatch(incrementHeart())
-        }
-        return{
-          ...prev,
-          [id]: !prev[id],
-        }
-        })
-  
-    }
-   function checkcard(id,visibleImage,rate) {
-       setCardAdded((prev) => {
-         const isAdded=prev[id]
-         if(isAdded){
-           Dispatch(decrementCard())
-         }else{
-           Dispatch(incrementCart())
-           const product={id,image:visibleImage,rate};
-           setSelect((prev)=>[...prev,product])
-           Dispatch(addToCart(product))
-         }
-         return{
-           ...prev,
-           [id]: !prev[id],
-         }
-         })
-   
-         
-     }
+   function colorCheck(id,visibelImage,rate) {
+        setLiked((prev) => {
+          const isLiked=prev[id]
+          if(isLiked){
+            Dispatch(decrementHeart())
+          }else{
+            Dispatch(incrementHeart())
+            const wishProduct ={id,image:visibelImage,rate}
+            setWishlist((prev)=>[...prev,wishProduct])
+            Dispatch(addToWish(wishProduct))
+          }
+          return{
+            ...prev,
+            [id]: !prev[id],
+          }
+          })
+    
+      }
+     function checkcard(id,visibleImage,rate) {
+         setCardAdded((prev) => {
+           const isAdded=prev[id]
+           if(isAdded){
+             Dispatch(decrementCard())
+           }else{
+             Dispatch(incrementCart())
+             const product={id,image:visibleImage,rate};
+             setSelect((prev)=>[...prev,product])
+             Dispatch(addToCart(product))
+           }
+           return{
+             ...prev,
+             [id]: !prev[id],
+           }
+           })      
+       }
     function zoomEffect(ImageUrl){
       setZoomImage(ImageUrl)
     }
@@ -90,7 +92,7 @@ function Modern() {
                   <div className="absolute gap-3 bottom-0 right-0 left-0 flex justify-center py-6 bg-white opacity-0 group-hover:opacity-100 md:opacity-100 transition duration-300 md:flex">
                   <button cclassName="group  rounded-full transition-colors 
                   "
-                  onClick={() => colorCheck(image.id)}>
+                  onClick={() => colorCheck(image.id,image.visibleImage,image.rate)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill={liked[image.id] ? "red" : "none"}

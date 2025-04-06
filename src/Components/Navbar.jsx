@@ -56,7 +56,7 @@ const Navbar = () => {
               />
             </svg>
           </button>
-          <button className="flex items-center justify-center  px-4 py-2 rounded hover:bg-gray-200 w-30  ">
+          <button onClick={()=>navigate('/wishlist')} className="flex items-center justify-center  px-4 py-2 rounded hover:bg-gray-200 w-30  ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -352,7 +352,7 @@ const Navbar = () => {
                 LOG IN
               </span>
             </button>
-            <button className="flex items-center justify-center  px-4 py-2 rounded hover:bg-gray-200 w-30  ">
+            <button onClick={()=>navigate("/wishlist")} className="flex items-center justify-center  px-4 py-2 rounded hover:bg-gray-200 w-30  ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

@@ -1,8 +1,13 @@
-import React from "react";
+
 import { useSelector,useDispatch } from "react-redux";
 import { removeFromcart } from "../Slices/slice";
 import axios from 'axios'
+import { useState } from "react";
 function Payment() {
+  const [mail,setMail] =useState("")
+  const [name,setName]= useState("")
+  const [phone,setPhone]=useState()
+  const [address, setAddress]=useState("")
   const cartItems=useSelector((state)=>state.Liked.cart)
   const subtotal = cartItems.reduce((acc, item) => acc + item.rate, 0);
   const shipping = subtotal > 0 ? 100 : 0;
@@ -16,7 +21,25 @@ function Payment() {
   const currency ="INR";
   const receipt = "order_receipt_" + new Date().getTime()
 const paymenthandle= async(e)=>{
-  e.preventDefault();
+   e.preventDefault();
+if (!name) {
+  alert("Please Enter Your Name");
+} else if (!mail) {
+  alert("Please Enter Your Email");
+} else if (!phone) {
+  alert("Please Enter Your Mobile Number");
+} else if (!address) {
+  alert("Please Enter Your Address");
+} else {
+  // All fields are valid – proceed with form submission
+  
+  const result = await axios.post("http://localhost:5000/details",{
+    name,
+    mail,
+    phone,
+    address
+  })
+  console.log(result.data)
   try {
     const response = await axios.post("https://e-commerce-qbwd.onrender.com/place-order",{
       amount,
@@ -62,6 +85,9 @@ const paymenthandle= async(e)=>{
   } catch (error) {
     console.error("Error creating payment order:", error.response?.data || error.message);
   }
+}
+
+ 
 
 }
 
@@ -79,6 +105,8 @@ const paymenthandle= async(e)=>{
             <input
               type="email"
               id="email"
+              value={mail}
+              onChange={(e)=>setMail(e.target.value)}
               placeholder="Enter your email"
               className="border border-gray-300 rounded p-2"
             />
@@ -90,6 +118,8 @@ const paymenthandle= async(e)=>{
             </label>
             <input
               type="text"
+              value={name}
+              onChange={(e)=>setName(e.target.value)}
               id="name"
               placeholder="Enter full name"
               className="border border-gray-300 rounded p-2"
@@ -102,6 +132,8 @@ const paymenthandle= async(e)=>{
             </label>
             <input
               type="text"
+              value={phone}
+              onChange={(e)=>setPhone(e.target.value)}
               id="mobile"
               placeholder="Enter mobile number"
               className="border border-gray-300 rounded p-2"
@@ -114,6 +146,8 @@ const paymenthandle= async(e)=>{
             </label>
             <textarea
               id="address"
+              value={address}
+              onChange={(e)=>setAddress(e.target.value)}
               placeholder="Enter delivery address"
               className="border border-gray-300 rounded p-2"
               rows="3"

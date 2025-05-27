@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html","./src/**/*.{html,js,jsx}"],
+content: ['./src/**/*.{js,jsx,ts,tsx,html}'],
   theme: {
     extend: {},
     fontFamily:{Bigshoulder:["Big Shoulders Inline", "sans-serif"]}

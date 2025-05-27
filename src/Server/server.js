@@ -18,6 +18,10 @@ app.get("/",(req,res)=>{
 app.post("/order",(req,res)=>{
   res.send("order placed")
 })
+app.post("/details",(req,res)=>{
+  
+  res.status(200).json({success:true})
+})
 
 app.post('/place-order',async(req,res)=>{
   try{
